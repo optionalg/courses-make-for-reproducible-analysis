@@ -1,33 +1,138 @@
-# DataCamp Template Course
-<a href=https://www.datacamp.com//teach/repositories/104680337/go target="_blank"><img src="https://s3.amazonaws.com/assets.datacamp.com/img/github/content-engineering-repos/course_button.png" width="150"></a>
-<a href=https://www.datacamp.com//teach/repositories target="_blank"><img src="https://s3.amazonaws.com/assets.datacamp.com/img/github/content-engineering-repos/dashboard_button.png" width="150"></a>
+# Make for Reproducible Analysis
 
-This an automatically generated <a href=https://www.datacamp.com target="_blank">DataCamp</a> course. You can start from these template files to create your own course.
+<!-- -------------------------------------------------------------------------------- -->
 
-Changes you make to this GitHub repository are automatically reflected in the linked DataCamp course. This means that you can enjoy all the advantages of version control, collaboration, issue handling ... of GitHub.
+## Step 1: Who is this lesson for?
 
-## Workflow
+### [Anya](https://github.com/datacamp/learner-profiles#anya)
 
-1. Edit the markdown and yml files in this repository. You can
-   * Use DataCamp's <a href="https://www.datacamp.com/teach/documentation#tab_teach_editor">Teach Editor</a>
-   * Use GitHub's online editor
-   * Use <a href=https://git-scm.com/ target="_blank">git</a> locally and push your changes
-2. Check out your build attempts on the <a href=https://www.datacamp.com//teach/repositories target="_blank">Dashboard</a>.
-3. Check out your automatically updated <a href=https://www.datacamp.com/teach/repositories/104680337/go target="_blank">course on DataCamp</a>
+<img alt="Anya" src="https://raw.githubusercontent.com/datacamp/learner-profiles/master/img/anya.png" height="150" width="150" />
 
-## Getting Started
+Anya started using Make in her first C programming course twenty years ago,
+but has never used it to automate data analysis.
+This course will show her some new tricks and spark some new ideas.
 
-A DataCamp course consists of two types of files:
+### [Thanh](https://github.com/datacamp/learner-profiles#thanh)
 
-- `course.yml`, a <a href=http://docs.ansible.com/ansible/YAMLSyntax.html target="_blank">YAML-formatted file</a> that's prepopulated with some general course information.
-- `chapterX.md`, a markdown file with:
-   - a YAML header containing chapter information.
-   - markdown chunks representing DataCamp Exercises.
+<img alt="Thanh" src="https://raw.githubusercontent.com/datacamp/learner-profiles/master/img/thanh.png" height="150" width="150" />
 
-To learn more about the structure of a DataCamp course, check out the <a href=https://www.datacamp.com//teach/documentation#tab_course_structure target="_blank">documentation</a>.
+Thanh has never seen Make before.
+This course will show him how to re-run analyses when datasets or algorithms change.
 
-Every DataCamp exercise consists of different parts, read up about them <a href=https://www.datacamp.com//teach/documentation#tab_code_exercises target="_blank">here</a>. A very important part about DataCamp exercises is to provide automated personalized feedback to students. In R, these so-called Submission Correctness Tests (SCTs) are written with the <a href=https://github.com/datacamp/testwhat target="_blank">`testwhat`</a> package. SCTs for Python exercises are coded up with <a href=https://github.com/datacamp/pythonwhat target="_blank">`pythonwhat`</a>. Check out the GitHub repositories' wiki pages for more information and examples.
+<!-- -------------------------------------------------------------------------------- -->
 
-Want to learn more? Check out the <a href=https://www.datacamp.com//teach/documentation target="_blank">documentation</a> on teaching at DataCamp.
+## Step 2: How far will this lesson get its learners?
 
-*Happy teaching!*
+The directory `dosage` contains sub-directories whose names are patient IDs
+like `AC1071` and `DN2249`.
+Each sub-directory contains one or more CSV data files whose names are ISO-formatted dates
+(e.g, `dosage/AC1071/2017-10-02.csv`)
+that are formatted like this:
+
+```
+Time,Dosage (mg)
+03:45,30
+07:30,30
+11:50,60
+16:10,30
+04:00,20
+09:55,100
+13:20,20
+17:00,100
+```
+
+Another directory called `daily` contains one CSV file per patient with daily total dosages,
+e.g. `daily/AC1071.csv` contains:
+
+```
+Date,Total Dosage (mg)
+2017-10-02,1500
+2017-10-09,1350
+2017-10-16,1200
+```
+
+A third directory called `results` contains a single file called `averages.csv`
+that records the average daily dose per patient with the duration in dates of the dosage period,
+e.g.:
+
+```
+Patient ID,Dosage Duration,Average Daily Dosage (mg)
+AC1071,61,1422.5
+DN2249,55,1190.0
+```
+
+It also contains a scatter plot in `results/averages.png` that shows
+the relationship between dosage duration and average daily dosage.
+
+The directory `bin` contains three analysis scripts:
+
+1. `bin/patient-total output-file file-1 file-2 ...` reads data from one or more raw dosage files
+   (like those in `dosage/AC1071/2017-10-02.csv`)
+   and re-creates that patient's total daily dosage file
+   (like those in `daily/AC1071.csv`).
+2. `bin/patient-average output-file file-1 file-2` reads one or more daily dosage files
+   (like those in `daily/AC1071.csv`)
+   and re-creates an average daily dosage file `results/averages.csv`.
+3. `bin/scatter input-file output-file` reads an average daily dosage file like `results/averages.csv`
+   and creates a scatter plot like `results/averages.png`.
+
+New daily dosage files are being added to existing patient directories all the time,
+and new patient directories are being created weekly.
+Write a Makefile that correctly regenerates the two files in the `results` directory
+every time any new data is added.
+Do only those computations that are strictly required.
+
+<!-- -------------------------------------------------------------------------------- -->
+
+## Step 3: What will the learner's mental model be at the end of the lesson?
+
+<em>
+
+</em>
+
+![Basic Make Concepts](img/make.png)
+
+<!-- -------------------------------------------------------------------------------- -->
+
+## Step 4: What will the learner do along the way?
+
+FIXME
+
+<!-- -------------------------------------------------------------------------------- -->
+
+## Step 5: In what order will the learner do things?
+
+The formative assessments in Step 4 (Formative Assessments) are already in order.
+
+<!-- -------------------------------------------------------------------------------- -->
+
+## Step 6: How are the exercises connected?
+
+The chapter and lesson outline is:
+
+- FIXME
+
+The datasets are:
+
+- FIXME
+
+<!-- -------------------------------------------------------------------------------- -->
+
+## Step 7: How will learners find the course and know if it's for them?
+
+**Course Description**
+
+Make is a tool that can keep track of which files depend on which
+others, and update ones that have fallen out of date.  While it was
+originally invented to help prorammers compile complex programs, data
+analysts now use it to ensure that their work is reproducible.  This
+lesson will introduce key elements of Make and show you how to use
+them efficiently.
+
+**Learning Objectives**
+
+- FIXME
+
+**Prerequisites**
+
+- Introduction to the Unix Shell for Data Scientists
