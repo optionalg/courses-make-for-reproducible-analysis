@@ -1,6 +1,13 @@
 title                : Make for Reproducible Analysis
-description          : This is an automatically generated demo course which will help you on your way to create an awesome DataCamp course.
+description          : Make is a tool that can keep track of which files depend
+  on which others, and update ones that have fallen out of date.  While it was
+  originally invented to help prorammers compile complex programs, data analysts
+  now use it to ensure that their work is reproducible.  This lesson will introduce
+  key elements of Make and show you how to use them efficiently.
 university           : DataCamp
 difficulty_level     : 2
 time_needed          : 3 hours
-programming_language : python
+programming_language : shell
+from: shell-base-prod:15
+datasets:
+  filesys.zip: File system
