@@ -25,5 +25,5 @@ digraph conda_concepts {
     commands -> patterns [ label="may use" ]
     dependencies -> "execution order" [ label="imply" ]
     "execution order" -> rules [ label="of" ]
-    dependencies -> rules [ label="implicitly defined by" ]
+    rules -> dependencies [ label="implicitly define" ]
 }
