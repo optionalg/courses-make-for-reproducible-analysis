@@ -11,19 +11,15 @@ digraph conda_concepts {
     macros
     commands
 
-    Makefile -> "files" [ label="lists" ]
     Makefile -> rules [ label="defines" ]
     Makefile -> macros [ label="defines" ]
+    rules -> files [ label="specify" ]
+    rules -> patterns [ label="use" ]
+    rules -> macros [ label="use" ]
+    rules -> commands [ label="specify" ]
     files -> "source files" [ label="may be" ]
     files -> "generated files" [ label="may be" ]
     files -> dependencies [ label="may have" ]
-    rules -> files [ label="specify" ]
-    rules -> patterns [ label="may use" ]
-    rules -> macros [ label="may use" ]
-    rules -> commands [ label="specify" ]
-    commands -> macros [ label="may use" ]
-    commands -> patterns [ label="may use" ]
     dependencies -> "execution order" [ label="imply" ]
-    "execution order" -> rules [ label="of" ]
-    rules -> dependencies [ label="implicitly define" ]
+    "execution order" -> commands [ label="of" ]
 }
