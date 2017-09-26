@@ -86,7 +86,7 @@ Do only those computations that are strictly required.
 
 ## Step 3: What will the learner's mental model be at the end of the lesson?
 
-![Concept Map for Make](design/concept.png)
+![Concept Map for Make](design/concept.svg)
 
 <!-- -------------------------------------------------------------------------------- -->
 
