@@ -1,0 +1,29 @@
+digraph conda_concepts {
+    node [shape = rectangle];
+    Makefile
+    files
+    dependencies
+    "execution order"
+    "source files"
+    "generated files"
+    rules
+    patterns
+    macros
+    commands
+
+    Makefile -> "files" [ label="lists" ]
+    Makefile -> rules [ label="defines" ]
+    Makefile -> macros [ label="defines" ]
+    files -> "source files" [ label="may be" ]
+    files -> "generated files" [ label="may be" ]
+    files -> dependencies [ label="may have" ]
+    rules -> files [ label="specify" ]
+    rules -> patterns [ label="may use" ]
+    rules -> macros [ label="may use" ]
+    rules -> commands [ label="specify" ]
+    commands -> macros [ label="may use" ]
+    commands -> patterns [ label="may use" ]
+    dependencies -> "execution order" [ label="imply" ]
+    "execution order" -> rules [ label="of" ]
+    dependencies -> rules [ label="implicitly defined by" ]
+}
