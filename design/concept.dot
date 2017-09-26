@@ -1,25 +1,48 @@
 digraph conda_concepts {
     node [shape = rectangle];
     Makefile
+    macros
+    rules
+    commands
+    patterns
     files
     dependencies
-    "execution order"
     "source files"
     "generated files"
-    rules
-    patterns
-    macros
-    commands
+    "execution order"
 
-    Makefile -> rules [ label="defines" ]
-    Makefile -> macros [ label="defines" ]
+    {
+      rank=same
+      rankdir=LR
+      macros
+      rules
+      commands
+      macros -> rules [style=invis]
+    }
+
+    {
+      rank=same
+      rankdir=LR
+      "execution order"
+      patterns
+      files
+    }
+
+    i01 [shape=point, width=0, height=0]
+    i03 [shape=point, width=0, height=0]
+
+    Makefile -> i01 [ dir="none", label="defines" ]
+      i01 -> rules
+      i01 -> macros
     rules -> files [ label="specify" ]
     rules -> patterns [ label="use" ]
     rules -> macros [ label="use" ]
     rules -> commands [ label="specify" ]
-    files -> "source files" [ label="may be" ]
-    files -> "generated files" [ label="may be" ]
-    files -> dependencies [ label="may have" ]
+    files -> i03 [ dir="none", label="may be" ]
+      i03 -> "source files"
+      i03 -> "generated files"
+      i03 -> dependencies
+    patterns -> files [ label="match" ]
     dependencies -> "execution order" [ label="imply" ]
     "execution order" -> commands [ label="of" ]
 }
