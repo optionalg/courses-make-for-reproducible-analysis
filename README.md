@@ -17,7 +17,10 @@ This course will show her some new tricks and spark some new ideas.
 <img alt="Thanh" src="https://raw.githubusercontent.com/datacamp/learner-profiles/master/img/thanh.png" height="150" width="150" />
 
 Thanh has never seen Make before.
-This course will show him how to re-run analyses when datasets or algorithms change.
+He currently re-runs analyses with RStudio scripts,
+but now that he's getting hundreds of new datasets each week,
+he would like to re-run only the calculations he needs to.
+This course will show him how to do that.
 
 <!-- -------------------------------------------------------------------------------- -->
 
@@ -92,29 +95,79 @@ Do only those computations that are strictly required.
 
 ## Step 4: What will the learner do along the way?
 
-FIXME
+### Do Analysis By Hand
+
+Run `bin/patient-total`, `bin/patient-average`, and `bin/scatter` by hand
+to trace the calculations for one patient.
+
+### Recalculate One Patient's Data
+
+- Write a Make rule to run `bin/patient-total` to recreat the daily dosage file for one patient.
+- Use `touch` to trigger execution.
+- Add a new raw dosage file for that patient and check that the rule runs.
+
+### Recalculate Dependent Files
+
+- Add rules to regenerate `results/averages.csv` and `result/averages.png`.
+- Use `touch` to check that programs only run when they need to.
+- Trigger the whole execution chain by adding a new raw dosage file.
+
+### Using Automatic Variables
+
+- Rewrite existing rules using `$@`, `$^`, and `$<`.
+
+### Creating a Tree of Dependencies
+
+- Add a rule to regenerate `daily/AC1433.csv`.
+- Modify the rule for `results/averages.csv` so that it is updated when it needs to be.
+- Test using `touch` and by adding more data files.
+- See what happens when a daily dosage file is *removed* (answer: nothing).
+
+### Writing Pattern Rules
+
+- Write a wildcard pattern rule to replace the separate rules for `AC1071` and `AC1433`.
+- Test by adding more data files for each patient.
+- Test again by adding an entirely new patient.
+
+### Including All Dependencies
+
+- Modify rules to re-run when their scripts change.
+
+### Other Kinds of Rules
+
+- Write a phony `clean` target.
+- Write a phony `test` target.
+
+### Using Macros
+
+- Replace names of scripts with macros.
 
 <!-- -------------------------------------------------------------------------------- -->
 
-## Step 5: In what order will the learner do things?
-
-The formative assessments in Step 4 (Formative Assessments) are already in order.
-
-<!-- -------------------------------------------------------------------------------- -->
-
-## Step 6: How are the exercises connected?
+## Step 5: How are the concepts connected?
 
 The chapter and lesson outline is:
 
-- FIXME
+- Simple Rules
+  - What is Make?
+  - What does a simple rule contain?
+  - How does Make handle dependencies?
+- Writing Better Rules
+  - What are automatic variables?
+  - What is a pattern rule?
+  - What is a macro?
+- Project Management
+  - How can we use Make to manage projects?
+  - How can we make execution depend on changes to scripts?
 
 The datasets are:
 
-- FIXME
+- Dosage files.
+- A Python script to generate random dosage files.
 
 <!-- -------------------------------------------------------------------------------- -->
 
-## Step 7: How will learners find the course and know if it's for them?
+## Step 6: How will learners find the course and know if it's for them?
 
 **Course Description**
 
@@ -127,7 +180,13 @@ them efficiently.
 
 **Learning Objectives**
 
-- FIXME
+- Explain what Make is for and how it differs from using handwritten scripts.
+- Identify the targets, dependencies, and actions of rules.
+- Trace the execution order of rules in a short Makefile.
+- Use automatic variables to shorten rules.
+- Use wildcards to write pattern rules.
+- Use macros and functions to make Makefiles more readable.
+- Use Make to automate project management tasks.
 
 **Prerequisites**
 
