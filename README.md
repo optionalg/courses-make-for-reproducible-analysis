@@ -2,6 +2,32 @@
 
 <!-- -------------------------------------------------------------------------------- -->
 
+## Step 1: Brainstorming
+
+1. What problem(s) will student learn how to solve?
+   - How to write Makefiles to re-run data analyses.
+   - How to use pattern rules to make their Makefiles more powerful.
+   - How to use macros to parameterize their Makefiles.
+2. What techniques or concepts will students learn?
+   - Dependencies.
+   - Rules.
+   - Automatic variables.
+   - Pattern rules.
+   - Choosing easy-to-match filenames.
+3. What technologies, packages, or functions will students use?
+   - GNU Make.
+4. What terms or jargon will you define?
+   - "rule"
+   - "dependency"
+   - "pattern"
+   - "macro"
+5. What mistakes or misconceptions do you expect?
+   - When patterns are matched to files.
+8. What datasets will you use?
+   - Synthesized.
+
+================================================================================
+
 ## Step 1: Who is this lesson for?
 
 ### [Anya](https://github.com/datacamp/learner-profiles#anya)
