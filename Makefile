@@ -2,6 +2,7 @@ FILESYS=./filesys
 DOSAGE_DIR=${FILESYS}/dosage
 NUM_PATIENTS=20
 SEED=7493418
+YEAR=2016
 
 # default target
 all : commands
@@ -12,7 +13,7 @@ commands :
 
 ## dosage     : regenerate raw dosage files.
 dosage :
-	bin/generate-dosage-files.py -d ${DOSAGE_DIR} -n ${NUM_PATIENTS} -r ${SEED}
+	bin/generate-dosage-files.py -d ${DOSAGE_DIR} -n ${NUM_PATIENTS} -r ${SEED} -y 2016
 
 design/concept.svg : design/concept.dot
 	dot -Tsvg -odesign/concept.svg design/concept.dot
