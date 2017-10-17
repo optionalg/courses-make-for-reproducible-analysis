@@ -85,24 +85,19 @@ AC1071,61,1422.5
 DN2249,55,1190.0
 ```
 
-It also contains a scatter plot in `results/averages.png` that shows
-the relationship between dosage duration and average daily dosage.
-
 The directory `bin` contains three analysis scripts:
 
-1. `bin/patient-total output-file file-1 file-2 ...` reads data from one or more raw dosage files
+1. `bin/patient-total -o output-file file-1 file-2 ...` reads data from one or more raw dosage files
    (like those in `dosage/AC1071/*.csv`)
    and re-creates that patient's total daily dosage file
    (e.g., `daily/AC1071.csv`).
-2. `bin/patient-average output-file file-1 file-2` reads one or more daily dosage files
+2. `bin/patient-average -o output-file file-1 file-2` reads one or more daily dosage files
    (like `daily/AC1071.csv` and `daily/DN2249.csv`)
    and re-creates an average daily dosage file `results/averages.csv`.
-3. `bin/scatter input-file output-file` reads an average daily dosage file like `results/averages.csv`
-   and creates a scatter plot like `results/averages.png`.
 
 New daily dosage files are being added to existing patient directories all the time,
 and new patient directories are being created weekly.
-Write a Makefile that correctly regenerates the two files in the `results` directory
+Write a Makefile that correctly regenerates the file in the `results` directory
 every time any new data is added.
 Do only those computations that are strictly required.
 

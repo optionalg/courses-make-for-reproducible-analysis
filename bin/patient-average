@@ -1,0 +1,77 @@
+#!/usr/bin/env python
+
+'''Calculate average daily dosage per patient.'''
+
+import sys
+import os
+from glob import glob
+from getopt import getopt
+from datetime import date, datetime
+
+
+def main():
+    '''Main command-line driver.'''
+
+    try:
+        config = parseArgs()
+        data = [averageDosage(f) for f in sorted(config['inputs'])]
+        if config['output'] is None:
+            display(sys.stdout, data)
+        else:
+            with open(config['output'], 'w') as writer:
+                display(writer, data)
+    except Exception as e:
+        sys.stderr.write(str(e).rstrip() + '\n')
+        sys.exit(1)
+
+
+def parseArgs():
+    '''Parse command-line arguments, returning config dictionary.'''
+
+    config = {
+        'inputs' : None,
+        'output' : None,
+        'verbose' : False
+    }
+
+    options, config['inputs'] = getopt(sys.argv[1:], 'o:v')
+    if not config['inputs']:
+        raise Exception('No input filenames specified')
+
+    for (opt, arg) in options:
+        if opt == '-o':
+            config['output'] = arg
+        elif opt == '-v':
+            config['verbose'] = True
+        else:
+            raise Exception('Unrecognized option "{}"'.format(opt))
+
+    return config
+
+
+def averageDosage(filename):
+    '''Calculate average dosage, returning patient ID, days, and average.'''
+
+    strptime = datetime.strptime
+    if not filename.endswith('.csv'):
+        raise Exception('Input filename does not end with ".csv": "{}"'.format(filename))
+    patient = os.path.basename(filename)[:-4]
+    dateFmt = '%Y-%m-%d'
+    with open(filename, 'r') as reader:
+        reader.readline() # skip title
+        raw = [line.strip().split(',') for line in reader]
+        dates = sorted([x[0] for x in raw])
+        days = (strptime(dates[-1], dateFmt) - strptime(dates[0], dateFmt)).days + 1
+        dosages = [int(x[1]) for x in raw]
+        averageDosage = sum(dosages) / len(dosages)
+    return (patient, days, averageDosage)
+
+
+def display(stream, data):
+    stream.write('Date,Total Dosage (mg)\n')
+    for (patient, days, dosage) in data:
+        stream.write('{},{},{}\n'.format(patient, days, dosage))
+
+
+if __name__ == '__main__':
+    main()
