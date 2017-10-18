@@ -75,8 +75,8 @@ Date,Total Dosage (mg)
 2017-10-16,1200
 ```
 
-A third directory called `results` contains a single file called `averages.csv`
-that records the average daily dose per patient with the duration in dates of the dosage period,
+A single file in the root directory called `averages.csv`
+records the average daily dose per patient with the duration in dates of the dosage period,
 e.g.:
 
 ```
@@ -100,6 +100,20 @@ and new patient directories are being created weekly.
 Write a Makefile that correctly regenerates the file in the `results` directory
 every time any new data is added.
 Do only those computations that are strictly required.
+
+> **Solution**
+>
+> ```
+> STEMS=$(notdir $(wildcard dosage/*))
+> DAILY=$(patsubst %,daily/%.csv,${STEMS})
+>
+> averages.csv : ${DAILY}
+> 	bin/patient-average -o $@ ${DAILY}
+>
+> daily/%.csv : dosage/%/*.csv
+> 	mkdir -p daily
+> 	bin/patient-total -o $@ $^
+> ```
 
 <!-- -------------------------------------------------------------------------------- -->
 

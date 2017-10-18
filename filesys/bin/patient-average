@@ -70,7 +70,7 @@ def averageDosage(filename):
 def display(stream, data):
     stream.write('Date,Total Dosage (mg)\n')
     for (patient, days, dosage) in data:
-        stream.write('{},{},{}\n'.format(patient, days, dosage))
+        stream.write('{},{},{:.1f}\n'.format(patient, days, dosage))
 
 
 if __name__ == '__main__':
