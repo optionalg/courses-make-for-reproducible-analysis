@@ -125,24 +125,24 @@ Do only those computations that are strictly required.
 
 1. Recalculate one patient's data.
    - Write a Make rule to run `bin/patient-total` to recreat the daily dosage file for one patient.
-   - Use `touch` to trigger execution.
+   - Use `touch` on the source file to trigger rule execution for testing.
    - Add a new raw dosage file for that patient and check that the rule runs.
 
 1. Recalculate dependent files.
-   - Add rules to regenerate `results/averages.csv` and `result/averages.png`.
+   - Add a rule to regenerate `results/averages.csv`.
    - Use `touch` to check that programs only run when they need to.
    - Trigger the whole execution chain by adding a new raw dosage file.
 
 1. Use automatic variables.
    - Rewrite existing rules using `$@`, `$^`, and `$<`.
 
-1. Create a tree of dependencies.
+1. Create a tree of dependencies (instead of a linear chain).
    - Add a rule to regenerate `daily/AC1433.csv`.
    - Modify the rule for `results/averages.csv` so that it is updated when it needs to be.
    - Test using `touch` and by adding more data files.
    - See what happens when a daily dosage file is *removed* (answer: nothing).
 
-1. Write pattern rules.
+1. Write a pattern rule.
    - Write a wildcard pattern rule to replace the separate rules for `AC1071` and `AC1433`.
    - Test by adding more data files for each patient.
    - Test again by adding an entirely new patient.
@@ -155,7 +155,8 @@ Do only those computations that are strictly required.
    - Write a phony `test` target.
 
 1. Use macros.
-   - Replace names of scripts with macros.
+   - Replace names of input and output directories with macros.
+   - Override those macros with command-line definitions.
 
 <!-- -------------------------------------------------------------------------------- -->
 
